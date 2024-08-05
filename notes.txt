@@ -1,0 +1,4 @@
+Inventory Items are no longer case sensetive 
+Changed the theme
+Better design for list of Items
+In the add menu item can be added by pressing enter without clicking a button
