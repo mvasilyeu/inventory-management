@@ -266,7 +266,7 @@ export default function Home() {
               </Item>
             </Grid>
           ))}
-          <Grid xs={2} display={"flex"} alignItems="center" justifyContent={"center"} marginLeft={"-2vh"}> <Item><Fab onClick={() => { handleOpen() }}><PlusIcon /></Fab></Item> </Grid>
+          <Grid xs={2} display={"flex"} alignItems="center" justifyContent={"center"} marginLeft={"2vh"}> <Item><Fab onClick={() => { handleOpen() }}><PlusIcon /></Fab></Item> </Grid>
         </Grid>
       </Box>
     </Box>
