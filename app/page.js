@@ -1,8 +1,8 @@
 'use client'
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import { firestore } from "@/firebase";
-import { Box, Fab, Grid, Modal, Stack, Button, TextField, Paper, Typography, styled } from "@mui/material";
+import { Box, Fab, Modal, Stack, Button, Paper, TextField, Typography, styled, InputAdornment, InputLabel, FormControl, FilledInput} from "@mui/material";
+import Grid from '@mui/material/Grid2';
 import { createSvgIcon } from '@mui/material/utils';
 import { collection, deleteDoc, doc, getDocs, query, setDoc, getDoc } from "firebase/firestore";
 import SearchIcon from '@mui/icons-material/Search';
@@ -195,22 +195,29 @@ export default function Home() {
         justifyContent="space-between"
         padding="0 2vw"
         marginBottom={2}
+        flexWrap={"wrap"}
       >
         <Typography variant="h2" color="#c7d5e0">
           Your Pantry
         </Typography>
-        <TextField
-          sx={{ backgroundColor: "#2a475e", borderRadius: 1 }}
-          variant="filled"
-          placeholder="Search..."
-          value={searchQuery}
-          onChange={handleSearch}
-          InputProps={{
-            startAdornment: (
-              <SearchIcon sx={{ marginRight: 1, color: "#c7d5e0" }} />
-            )
-          }}
-        />
+        <Box
+          component="form"
+          sx={{ '& > :not(style)': { m: 1, width: '25ch', height:"10%" } }}
+          noValidate
+          autoComplete="off"
+        >
+          <FormControl sx={{ m: 1, width: '25ch', backgroundColor: "#2a475e", borderRadius: 2 }} variant="filled">
+            <InputLabel sx = {{color: "#c7d5e0", marginLeft: "10%"}}>Search...</InputLabel>
+            <FilledInput 
+              value={searchQuery}
+              onChange={handleSearch}  
+              startAdornment = {
+              <InputAdornment position="start">
+                <SearchIcon sx={{color: "#c7d5e0"}}/>
+              </InputAdornment>}
+            />
+          </FormControl>
+        </Box>
         <Box>
           <Button
             variant="contained"
@@ -238,13 +245,12 @@ export default function Home() {
         height="calc(100vh - 250px)"
         width="90%"
       >
-        <Grid container>
+        <Grid container spacing={1}>
           {filteredInventory.map(({ name, quantity }) => (
             <Grid
-              xs={2}
+              size={"auto"}
               key={name}
               display={'flex'}
-              margin="2vh"
             >
               <Item>
                 <Stack direction={"column"} >
@@ -266,7 +272,9 @@ export default function Home() {
               </Item>
             </Grid>
           ))}
-          <Grid xs={2} display={"flex"} alignItems="center" justifyContent={"center"} marginLeft={"2vh"}> <Item><Fab onClick={() => { handleOpen() }}><PlusIcon /></Fab></Item> </Grid>
+
+          <Grid size={"auto"} display={"flex"} alignItems="center" justifyContent={"center"}> <Item><Fab onClick={() => { handleOpen() }}><PlusIcon /></Fab></Item> </Grid>
+    
         </Grid>
       </Box>
     </Box>
